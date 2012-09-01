@@ -22,8 +22,8 @@ void *send_loop(void *socket) {
       if (!strcmp(input, "quit")) {
         exit(0);
       }
-      if ((rv = send(socket_fd, input, strlen(input)*4, 0)) == -1) {
-        perror("\nSocket failure during send.");
+      if ((rv = send(socket_fd, input, strlen(input)*4, 0)) < 0) {
+        perror("socket failure during send");
         exit(-1);
       }
     }
@@ -38,7 +38,7 @@ void *recv_loop(void *socket) {
   while (1) {
     char sent[256];
     if ((rv = recv(socket_fd, sent, 256, 0)) == -1) {
-      perror("\nSocket failure during recv.");
+      perror("socket failure during recv");
       exit(-1);
     }
     if (rv == 0) {
@@ -76,12 +76,12 @@ int main(int argc, char **argv) {
   }
 
   if ((socket_fd = socket(servinfo->ai_family, servinfo->ai_socktype, servinfo->ai_protocol)) == -1) {
-    perror("\n Failed to create socket");
+    perror("failed to create socket");
     return -1;
   }
 
   if (connect(socket_fd, servinfo->ai_addr, servinfo->ai_addrlen) == -1) {
-    perror("\n Failed to connect with server");
+    perror("failed to connect with server");
     close(socket_fd);
     return -1;
   }
