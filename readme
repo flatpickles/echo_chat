@@ -1,0 +1,8 @@
+echo_chat
+Matt Nichols (man1)
+
+echo_chat consists of two simple C programs, written to demonstrate TCP socket communications in C, as well as the implementation of basic concurrency using both pthreads and the select syscall. The client uses a pthread for each sending and receiving messages from the server, while the server uses select to handle many concurrent socket connections from different clients. Messages are limited to 256 bytes in size, for simplicity.
+
+Usage:
+  client server_hostname port
+  server listening_port
