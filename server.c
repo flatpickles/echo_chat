@@ -12,7 +12,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#include "server.h"
+fd_set fd_list;
 
 int main(int argc, char **argv) {
   // check arguments

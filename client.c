@@ -11,7 +11,10 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#include "client.h"
+void *send_loop(void *socket);
+void *recv_loop(void *socket);
+
+pthread_t in_thread, out_thread;
 
 void *send_loop(void *socket) {
   int rv, socket_fd = (int)socket;
