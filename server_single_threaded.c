@@ -39,6 +39,7 @@ int main(int argc, char **argv)
     int s;
     struct sockaddr_storage remote_addr;
     socklen_t addr_len;
+    addr_len = sizeof(remote_addr);
 
     int ret;
     char recv_buf[MSG_BUFFER_SIZE];
