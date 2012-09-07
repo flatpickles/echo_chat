@@ -14,7 +14,7 @@
 
 #define MSG_BUFFER_SIZE 256
 
-int main(int argc, char **argv) 
+int main(int argc, char **argv)
 {
     // check arguments
     if (argc != 2) {
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
     if ((rv = getaddrinfo(NULL, port_str, &hints, &servinfo)) != 0) {
         fprintf(stderr, "\n getaddrinfo error: %s", gai_strerror(rv));
         return -1;
-    }   
+    }
 
     int s;
     struct sockaddr_storage remote_addr;
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 
     while (1)
     {
-        
+
         if ((socket_fd = socket(servinfo->ai_family, servinfo->ai_socktype, servinfo->ai_protocol)) < 0) {
             perror("\n Failed to create socket");
             return -1;
@@ -73,10 +73,11 @@ int main(int argc, char **argv)
         else
         {
             close(socket_fd);
+            printf("[%d] new connection\n", s);
             while( (ret = recv(s, recv_buf, MSG_BUFFER_SIZE, 0)) > 0)
             {
                 printf("[%d] \"%s\"\n", s, recv_buf);
-                sprintf(send_buf, "you send \"%s\"", recv_buf);
+                sprintf(send_buf, "you sent \"%s\"", recv_buf);
                 if( (ret = send(s, send_buf, strlen(send_buf)*4, 0)) <0)
                 {
                     perror("error on send call");
@@ -88,7 +89,7 @@ int main(int argc, char **argv)
 
             if( ret == 0)
             {
-                printf("client disconnected\n");
+                printf("[%d] connection closed\n", s);
                 close(s);
             }
             else if( ret < 0)

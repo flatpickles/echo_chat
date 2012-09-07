@@ -11,4 +11,4 @@ server_single_threaded: server_single_threaded.c
 server_multi_threaded: server_multi_threaded.c
 
 clean:
-	rm -f client server
+	rm -rf client server server_single_threaded server_multi_threaded *.dSYM
