@@ -17,7 +17,7 @@ fd_set fd_list;
 int main(int argc, char **argv) {
   // check arguments
   if (argc != 2) {
-    printf("usage: server listening_port");
+    printf("usage: server listening_port\n");
     return 0;
   }
   char *port_str = argv[1];

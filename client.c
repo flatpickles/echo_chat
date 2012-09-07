@@ -83,7 +83,8 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  if (connect(socket_fd, servinfo->ai_addr, servinfo->ai_addrlen) == -1) {
+int ret;
+  if ((ret = connect(socket_fd, servinfo->ai_addr, servinfo->ai_addrlen)) == -1) {
     perror("failed to connect with server");
     close(socket_fd);
     return -1;
