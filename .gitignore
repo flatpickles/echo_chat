@@ -1,3 +1,5 @@
 *.dSYM
 client
-server
+server_select
+server_single_threaded
+server_multi_threaded
