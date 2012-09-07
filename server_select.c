@@ -12,6 +12,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
+#define MSG_BUFFER_SIZE 256
+
 fd_set fd_list;
 
 int main(int argc, char **argv) {
@@ -93,8 +95,8 @@ int main(int argc, char **argv) {
         } else {
           // recv from client
           int rv;
-          char sent[256];
-          if ((rv = recv(i, sent, 256, 0)) <= 0) {
+          char sent[MSG_BUFFER_SIZE];
+          if ((rv = recv(i, sent, MSG_BUFFER_SIZE, 0)) <= 0) {
             if (rv != 0) perror("error on recv call");
             close(i);
             FD_CLR(i, &fd_list);
@@ -104,7 +106,7 @@ int main(int argc, char **argv) {
 
           // print and echo
           printf("[%d] \"%s\"\n", i, sent);
-          char reply[256];
+          char reply[MSG_BUFFER_SIZE];
           sprintf(reply, "you sent \"%s\"", sent);
           if ((rv = send(i, reply, strlen(reply)*4, 0)) < 0) {
             perror("error on send call");

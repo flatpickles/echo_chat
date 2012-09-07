@@ -11,6 +11,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
+#define MSG_BUFFER_SIZE 256
+
 void *send_loop(void *socket);
 void *recv_loop(void *socket);
 
@@ -19,7 +21,7 @@ pthread_t in_thread, out_thread;
 void *send_loop(void *socket) {
   int rv, socket_fd = (int)socket;
   while (1) {
-    char input[256];
+    char input[MSG_BUFFER_SIZE];
     if (fgets(input, sizeof(input), stdin) != NULL) {
       input[strlen(input)-1] = 0; // remove newline
       if (!strcmp(input, "quit")) {
@@ -39,8 +41,8 @@ void *send_loop(void *socket) {
 void *recv_loop(void *socket) {
   int rv, socket_fd = (int)socket;
   while (1) {
-    char sent[256];
-    if ((rv = recv(socket_fd, sent, 256, 0)) == -1) {
+    char sent[MSG_BUFFER_SIZE];
+    if ((rv = recv(socket_fd, sent, MSG_BUFFER_SIZE, 0)) == -1) {
       perror("socket failure during recv");
       exit(-1);
     }
