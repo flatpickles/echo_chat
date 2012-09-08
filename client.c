@@ -53,6 +53,11 @@ void *recv_loop(void *socket) {
         printf("[server] %s\n", sent);
         memset(sent, 0, sizeof(sent));
         fflush(stdout);
+
+        /**
+        // memory leak for valgrind example...
+        malloc(256);
+        **/
     }
     return NULL;
 }
@@ -66,6 +71,11 @@ int main(int argc, char **argv) {
     char *ip_str = argv[1];
     char *port_str = argv[2];
     printf("Connecting with %s on port %s...\n", ip_str, port_str);
+
+    /**
+    // segfault for GDB example...
+    printf("%s\n", (char *)0x0030);
+    **/
 
     // establish the connection
 
