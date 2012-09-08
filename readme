@@ -1,7 +1,7 @@
 echo_chat
-Matt Nichols (man1, snowli)
+Matt Nichols, Snow Li (man1, snowli)
 
-echo_chat consists of several simple C programs, written to demonstrate TCP socket communications in C, as well as the implementation of basic concurrency using both pthreads and the select syscall. 
+echo_chat consists of several simple C programs, written to demonstrate TCP socket communications in C, as well as the implementation of basic concurrency using both pthreads and the select syscall.
 
 The client uses a pthread for each sending and receiving messages from the server. There are three different servers: one uses select to handle many concurrent socket connections from different clients, one uses multiple threads, and one uses a single thread (non-concurrent). Messages are limited to 256 bytes in size, for simplicity.
 
