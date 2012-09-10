@@ -78,7 +78,7 @@ int main(int argc, char **argv)
             {
                 printf("[%d] \"%s\"\n", s, recv_buf);
                 sprintf(send_buf, "you sent \"%s\"", recv_buf);
-                if( (ret = send(s, send_buf, strlen(send_buf)*4, 0)) <0)
+                if( (ret = send(s, send_buf, strlen(send_buf), 0)) <0)
                 {
                     perror("error on send call");
                 }

@@ -28,7 +28,7 @@ void *service_client_thr_func(void *arg)
     {
         printf("[%d] \"%s\"\n", (int)s, recv_buf);
         sprintf(send_buf, "you sent \"%s\"", recv_buf);
-        if( (ret = send(s, send_buf, strlen(send_buf)*4, 0)) <0)
+        if( (ret = send(s, send_buf, strlen(send_buf), 0)) <0)
         {
             perror("error on send call");
         }

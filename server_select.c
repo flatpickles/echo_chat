@@ -108,7 +108,7 @@ int main(int argc, char **argv) {
                     printf("[%d] \"%s\"\n", i, sent);
                     char reply[MSG_BUFFER_SIZE];
                     sprintf(reply, "you sent \"%s\"", sent);
-                    if ((rv = send(i, reply, strlen(reply)*4, 0)) < 0) {
+                    if ((rv = send(i, reply, strlen(reply), 0)) < 0) {
                         perror("error on send call");
                     }
                 }

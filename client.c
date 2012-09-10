@@ -27,7 +27,7 @@ void *send_loop(void *socket) {
             if (!strcmp(input, "quit")) {
                 exit(0);
             }
-            if ((rv = send(socket_fd, input, strlen(input)*4, 0)) < 0) {
+            if ((rv = send(socket_fd, input, strlen(input), 0)) < 0) {
                 perror("socket failure during send");
                 exit(-1);
             }
