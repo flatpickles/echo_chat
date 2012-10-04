@@ -22,6 +22,7 @@ void *send_loop(void *socket) {
     int rv, socket_fd = (int)socket;
     while (1) {
         char input[MSG_BUFFER_SIZE];
+        memset(input, 0, MSG_BUFFER_SIZE);
         if (fgets(input, sizeof(input), stdin) != NULL) {
             input[strlen(input)-1] = 0; // remove newline
             if (!strcmp(input, "quit")) {
@@ -42,6 +43,7 @@ void *recv_loop(void *socket) {
     int rv, socket_fd = (int)socket;
     while (1) {
         char sent[MSG_BUFFER_SIZE];
+        memset(sent, 0, MSG_BUFFER_SIZE);
         if ((rv = recv(socket_fd, sent, MSG_BUFFER_SIZE, 0)) == -1) {
             perror("socket failure during recv");
             exit(-1);

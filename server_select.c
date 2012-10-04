@@ -31,6 +31,7 @@ int main(int argc, char **argv) {
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_INET; // IPv4
     hints.ai_socktype = SOCK_STREAM; // TCP
+    hints.ai_flags = AI_PASSIVE; // use my IP
 
     if ((rv = getaddrinfo(NULL, port_str, &hints, &servinfo)) != 0) {
         fprintf(stderr, "\n getaddrinfo error: %s", gai_strerror(rv));
@@ -96,6 +97,7 @@ int main(int argc, char **argv) {
                     // recv from client
                     int rv;
                     char sent[MSG_BUFFER_SIZE];
+                    memset(sent, 0, MSG_BUFFER_SIZE);
                     if ((rv = recv(i, sent, MSG_BUFFER_SIZE, 0)) <= 0) {
                         if (rv != 0) perror("error on recv call");
                         close(i);
